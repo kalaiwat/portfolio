@@ -1,0 +1,31 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: var(--color-white);
+  border-bottom: var(--hairline);
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+  padding-block: var(--space-1);
+}
+
+.nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(2px, 1.5vw, 20px);
+}
+
+.nav__link {
+  display: inline-block;
+  padding: 6px clamp(4px, 1vw, 12px);
+  font-family: var(--font-body-family);
+  font-size: var(--font-caption);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: var(--lh-normal);
+  white-space: nowrap;
+}

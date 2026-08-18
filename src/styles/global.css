@@ -1,0 +1,215 @@
+/* reset + base element styles + shared interaction classes */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-white);
+  color: var(--color-black);
+  font-family: var(--font-body-family);
+  font-size: var(--font-body);
+  font-weight: 400;
+  line-height: var(--lh-normal);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* headings — Space Grotesk, tight leading, negative tracking */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display-family);
+  font-weight: 700;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.02em;
+  overflow-wrap: break-word;
+}
+
+h1 {
+  font-size: var(--font-h1);
+}
+
+h2 {
+  font-size: var(--font-h2);
+}
+
+h3 {
+  font-size: var(--font-h3);
+  font-weight: 500;
+}
+
+p {
+  overflow-wrap: break-word;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* the only "quiet" text on the page — earns slightly wider tracking */
+.caption {
+  font-family: var(--font-body-family);
+  font-size: var(--font-caption);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: var(--lh-normal);
+  color: var(--color-caption);
+}
+
+.display {
+  font-family: var(--font-display-family);
+  font-size: var(--font-display);
+  font-weight: 700;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.02em;
+  overflow-wrap: break-word;
+}
+
+.body-text {
+  font-size: var(--font-body);
+  line-height: var(--lh-normal);
+}
+
+/* fluid, edge-aware gutter — every section spans the full viewport width */
+.section {
+  padding-inline: var(--gutter);
+}
+
+/* a section that rests inverted; children that opt into invert-hover snap to
+   the opposite of this resting state */
+.inverted {
+  background: var(--color-black);
+  color: var(--color-white);
+  --focus-color: var(--color-white);
+}
+
+.inverted .caption {
+  color: var(--color-white);
+}
+
+/* 1.5a — hard-invert hover. instant snap, no easing: this is a cut, not a fade */
+.invert-hover {
+  background: var(--color-white);
+  color: var(--color-black);
+  transition: none;
+}
+
+.invert-hover:hover,
+.invert-hover:focus-visible {
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+.invert-hover:hover .caption,
+.invert-hover:focus-visible .caption {
+  color: var(--color-white);
+}
+
+/* inverse base — starts inverted, so hover snaps back to white */
+.invert-hover--inverse {
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+.invert-hover--inverse:hover,
+.invert-hover--inverse:focus-visible {
+  background: var(--color-white);
+  color: var(--color-black);
+}
+
+/* 1.5 / section 5 — keyboard focus is never suppressed. the cursor system is a
+   pointer-only enhancement, not a replacement for focus indication. */
+:focus-visible {
+  outline: 2px solid var(--focus-color);
+  outline-offset: 2px;
+}
+
+/* skip link — visually hidden until focused */
+.skip-link {
+  position: absolute;
+  left: var(--gutter);
+  top: 0;
+  z-index: 100;
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--font-caption);
+  letter-spacing: 0.02em;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* 1.5b — the cursor. a white circle under mix-blend-mode: difference, which
+   computes |top - bottom| per channel: white over white renders black, white
+   over black renders white. only clean because the palette is pure #000/#FFF. */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-white);
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  /* hidden until the pointer is first located — no fade, a hard cut */
+  visibility: hidden;
+}
+
+.cursor-dot.is-active {
+  visibility: visible;
+}
+
+/* hide the OS cursor only where a real pointer exists */
+@media (hover: hover) and (pointer: fine) {
+  html,
+  body,
+  a,
+  button,
+  .invert-hover {
+    cursor: none;
+  }
+}
+
+/* no pointer to replace — the fixed circle would just sit uselessly on screen */
+@media (hover: none), (pointer: coarse) {
+  .cursor-dot {
+    display: none;
+  }
+}

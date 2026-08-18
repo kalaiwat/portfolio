@@ -1,0 +1,18 @@
+.footer {
+  border-top: var(--hairline);
+  padding-block: var(--space-5);
+}
+
+.footer__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+}
+
+.footer__link {
+  display: inline-block;
+  padding: 4px 6px;
+  margin-inline-start: -6px;
+  font-size: var(--font-body);
+  font-weight: 500;
+}

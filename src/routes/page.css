@@ -1,0 +1,37 @@
+/* shared page chrome: title block + prose column */
+
+.page {
+  padding-block: var(--space-7) var(--space-8);
+}
+
+.page__title {
+  font-size: var(--font-h1);
+  margin-bottom: var(--space-5);
+}
+
+.page__meta {
+  margin-top: calc(var(--space-4) * -1 - var(--space-1));
+  margin-bottom: var(--space-5);
+}
+
+.page__prose {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 68ch;
+  font-size: var(--font-body);
+}
+
+.page__list {
+  margin-top: var(--space-2);
+}
+
+.page__back {
+  display: inline-block;
+  margin-top: var(--space-6);
+  padding: 4px 6px;
+  margin-inline-start: -6px;
+  font-size: var(--font-caption);
+  letter-spacing: 0.02em;
+  font-weight: 500;
+}
