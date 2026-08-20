@@ -1,3 +1,5 @@
+import type { Ref } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './Footer.css';
 
 const contacts = [
@@ -9,12 +11,34 @@ const contacts = [
   },
 ];
 
+/** on a /projects/:slug or /experience/:slug detail page, the footer's first
+    slot becomes a back link to that section's index instead of a contact */
+function getBackLink(pathname: string) {
+  if (/^\/projects\/[^/]+/.test(pathname)) {
+    return { label: '← all projects', to: '/projects' };
+  }
+  if (/^\/experience\/[^/]+/.test(pathname)) {
+    return { label: '← all experience', to: '/experience' };
+  }
+  return undefined;
+}
+
 /** persistent across every route — contact never needs hunting for. text links
     only, no icons, consistent with the no-decoration rule. */
-export function Footer() {
+export function Footer({ ref }: { ref?: Ref<HTMLElement> }) {
+  const { pathname } = useLocation();
+  const backLink = getBackLink(pathname);
+
   return (
-    <footer className="footer section">
+    <footer className="footer section" ref={ref}>
       <ul className="footer__list">
+        {backLink && (
+          <li>
+            <Link className="footer__link invert-hover" to={backLink.to}>
+              {backLink.label}
+            </Link>
+          </li>
+        )}
         {contacts.map(({ label, href }) => (
           <li key={href}>
             <a

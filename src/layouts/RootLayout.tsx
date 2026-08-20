@@ -7,27 +7,45 @@ import './RootLayout.css';
 
 export function RootLayout() {
   const navRef = useRef<HTMLElement>(null);
+  const footerRef = useRef<HTMLElement>(null);
+  const mainRef = useRef<HTMLElement>(null);
   const { pathname } = useLocation();
 
-  // the nav is fixed, so main has to clear it — and it wraps to two rows on
-  // narrow viewports, so the clearance is measured rather than hardcoded
+  // both nav and footer are fixed, so main has to clear them on both ends —
+  // and nav wraps to two rows on narrow viewports, so clearance is measured
+  // rather than hardcoded
   useLayoutEffect(() => {
     const nav = navRef.current;
-    if (!nav) return;
-    const sync = () => {
+    const footer = footerRef.current;
+    if (!nav || !footer) return;
+    const syncNav = () => {
       document.documentElement.style.setProperty(
         '--nav-height',
         `${nav.offsetHeight}px`,
       );
     };
-    sync();
-    const observer = new ResizeObserver(sync);
-    observer.observe(nav);
-    return () => observer.disconnect();
+    const syncFooter = () => {
+      document.documentElement.style.setProperty(
+        '--footer-height',
+        `${footer.offsetHeight}px`,
+      );
+    };
+    syncNav();
+    syncFooter();
+    const navObserver = new ResizeObserver(syncNav);
+    const footerObserver = new ResizeObserver(syncFooter);
+    navObserver.observe(nav);
+    footerObserver.observe(footer);
+    return () => {
+      navObserver.disconnect();
+      footerObserver.disconnect();
+    };
   }, []);
 
+  // main owns all page scrolling (see RootLayout.css) — window.scrollTo is a
+  // no-op, so reset the actual scroll container on navigation
   useEffect(() => {
-    window.scrollTo(0, 0);
+    mainRef.current?.scrollTo(0, 0);
   }, [pathname]);
 
   return (
@@ -39,11 +57,11 @@ export function RootLayout() {
       </a>
       <Nav ref={navRef} />
       <div className="shell">
-        <main className="main" id="main">
+        <main className="main" id="main" ref={mainRef}>
           <Outlet />
         </main>
-        <Footer />
       </div>
+      <Footer ref={footerRef} />
     </>
   );
 }

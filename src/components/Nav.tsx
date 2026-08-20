@@ -7,7 +7,7 @@ const links = [
   { to: '/about', label: 'about' },
   { to: '/projects', label: 'projects' },
   { to: '/experience', label: 'experience' },
-  { to: '/writing', label: 'writing' },
+  // { to: '/writing', label: 'writing' },
 ];
 
 export function Nav({ ref }: { ref?: Ref<HTMLElement> }) {

@@ -9,6 +9,10 @@
   --color-white: #ffffff;
   --color-caption: #555555;
 
+  /* the one exception to the strict palette: prose links need a tint to read
+     as clickable */
+  --color-link: #1d4ed8;
+
   /* focus ring color — overridden inside inverted sections so the ring always
      contrasts against the surface it sits on, not the element it wraps */
   --focus-color: var(--color-black);
@@ -21,6 +25,7 @@
   --font-h1: clamp(2.25rem, 6vw, 5.5rem);
   --font-h2: clamp(1.5rem, 3.5vw, 2.75rem);
   --font-h3: clamp(1.125rem, 2vw, 1.5rem);
+  --font-h4: clamp(1rem, 1.5vw, 1.25rem);
   --font-body: clamp(1rem, 1.1vw, 1.125rem);
   --font-caption: clamp(0.75rem, 0.85vw, 0.875rem);
 
@@ -44,6 +49,8 @@
   /* measured at runtime by RootLayout so main clears the fixed nav even when
      the nav wraps to two rows on narrow viewports */
   --nav-height: 64px;
+  /* measured at runtime by RootLayout so main clears the fixed footer */
+  --footer-height: 48px;
 
   --hairline: 1px solid var(--color-black);
 }

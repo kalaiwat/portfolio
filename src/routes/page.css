@@ -26,6 +26,22 @@
   margin-top: var(--space-2);
 }
 
+.page__stack {
+  margin-top: var(--space-7);
+}
+
+.page__stack .page__meta {
+  margin-bottom: var(--space-4);
+}
+
+.page__gallery {
+  margin-top: var(--space-7);
+}
+
+.page__gallery .page__meta {
+  margin-bottom: var(--space-4);
+}
+
 .page__back {
   display: inline-block;
   margin-top: var(--space-6);
@@ -34,4 +50,14 @@
   font-size: var(--font-caption);
   letter-spacing: 0.02em;
   font-weight: 500;
+}
+
+.page__link {
+  color: var(--color-link);
+}
+
+.page__link:hover,
+.page__link:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }

@@ -1,0 +1,114 @@
+/* sideways-scrolling filmstrip of project screenshots. every tile is pinned to
+   the same height and lets its own image's intrinsic aspect ratio set the
+   width — no fixed ratio baked in, so a portrait phone screenshot and a
+   16:9 desktop screenshot sit at their true shape in the same row.
+
+   the bleed and the scroll padding live on two different elements on purpose:
+   putting a negative margin on the scroll container itself fights its own
+   padding and drags the first tile back under the gutter. this wrapper bleeds
+   to the viewport edge; the track inside it is the actual scroller and only
+   ever gets positive padding, so the first tile lands flush with the rest of
+   the page's text and the last tile still clears the gutter at full scroll. */
+.gallery {
+  margin-inline: calc(var(--gutter) * -1);
+}
+
+.gallery__track {
+  display: flex;
+  gap: var(--space-3);
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-inline: var(--gutter);
+  padding-block-end: var(--space-2);
+  /* scrollbar hidden across engines — the row is still scrollable by drag,
+     wheel and trackpad, it just doesn't need a visible track under it */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.gallery__track::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery__item {
+  flex: none;
+  height: clamp(280px, 46vh, 480px);
+}
+
+/* inline-flex, not block: it needs to shrink-wrap to the image's rendered
+   width exactly like the plain img did before, and a flex formatting
+   context sidesteps the baseline whitespace an inline-block button would
+   otherwise leave under the image */
+.gallery__button {
+  display: inline-flex;
+  height: 100%;
+  cursor: pointer;
+}
+
+.gallery__image {
+  /* height drives the box; width is left to the image's own aspect ratio
+     rather than a container the tile would otherwise have to declare */
+  height: 100%;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  display: block;
+}
+
+/* full-size preview. always mounted so both the fade in and the fade out are
+   real transitions rather than a mount/unmount cut — closed state drops
+   visibility after the opacity transition finishes so it never intercepts
+   clicks or tab order while hidden. */
+.gallery-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.85);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.25s ease,
+    visibility 0s linear 0.25s;
+  /* white focus ring, not the page's default black one — invisible against
+     this background otherwise */
+  --focus-color: var(--color-white);
+}
+
+.gallery-lightbox--open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.25s ease;
+}
+
+.gallery-lightbox__image {
+  max-width: 88vw;
+  max-height: 88vh;
+  object-fit: contain;
+  cursor: default;
+}
+
+.gallery-lightbox__close {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--gutter);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: var(--color-white);
+  cursor: pointer;
+}
+
+.gallery-lightbox__close svg {
+  width: 20px;
+  height: 20px;
+}
+
+.gallery-lightbox__close:hover,
+.gallery-lightbox__close:focus-visible {
+  opacity: 0.7;
+}

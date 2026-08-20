@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   min-height: 64px;
-  padding-block: var(--space-1);
+  padding-block: var(--space-4);
 }
 
 .nav__list {
@@ -23,9 +23,16 @@
   display: inline-block;
   padding: 6px clamp(4px, 1vw, 12px);
   font-family: var(--font-body-family);
-  font-size: var(--font-caption);
+  font-size: var(--font-h4);
   font-weight: 500;
-  letter-spacing: 0.02em;
   line-height: var(--lh-normal);
   white-space: nowrap;
+}
+
+/* the cursor already inverts on hover via mix-blend-mode — the active tab's
+   permanent inverted state shouldn't also flip, or it reads as un-selecting */
+.nav__link.invert-hover--inverse:hover,
+.nav__link.invert-hover--inverse:focus-visible {
+  background: var(--color-black);
+  color: var(--color-white);
 }

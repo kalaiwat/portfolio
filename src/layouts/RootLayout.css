@@ -1,10 +1,15 @@
 .shell {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  padding-top: var(--nav-height);
+  height: 100vh;
 }
 
+/* the only scrollable container — nav and footer are fixed to the viewport,
+   so main clears both via measured padding and owns all page scrolling */
 .main {
-  flex: 1 0 auto;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding-top: var(--nav-height);
+  padding-bottom: var(--footer-height);
 }

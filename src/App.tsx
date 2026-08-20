@@ -5,6 +5,7 @@ import { About } from './routes/About';
 import { Projects } from './routes/Projects';
 import { ProjectDetail } from './routes/ProjectDetail';
 import { Experience } from './routes/Experience';
+import { ExperienceDetail } from './routes/ExperienceDetail';
 import { Writing } from './routes/Writing';
 import { WritingPost } from './routes/WritingPost';
 import { NotFound } from './routes/NotFound';
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
       { path: '/projects', element: <Projects /> },
       { path: '/projects/:slug', element: <ProjectDetail /> },
       { path: '/experience', element: <Experience /> },
+      { path: '/experience/:slug', element: <ExperienceDetail /> },
       { path: '/writing', element: <Writing /> },
       { path: '/writing/:slug', element: <WritingPost /> },
       { path: '*', element: <NotFound /> },

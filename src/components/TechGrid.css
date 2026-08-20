@@ -1,0 +1,111 @@
+.tech {
+  /* every tile is exactly this box, so the grid stays a clean lattice no matter
+     how tall a wrapped label ("Google Cloud") or how wide a logo happens to be.
+     height tracks vh because the binding constraint is vertical: the whole
+     stage has to fit between the fixed nav and the fixed footer. */
+  --tile-width: clamp(72px, 7.5vw, 100px);
+  --tile-height: clamp(80px, 13vh, 112px);
+  --icon-size: clamp(24px, 4.2vh, 38px);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* sized to match .nav__link exactly — same family, size, weight and padding,
+   so the filter row reads as a second, local navigation */
+.tech__filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(2px, 1.5vw, 20px);
+}
+
+.tech__pill {
+  display: inline-block;
+  padding: 6px clamp(4px, 1vw, 12px);
+  font-family: var(--font-body-family);
+  font-size: var(--font-h4);
+  font-weight: 500;
+  line-height: var(--lh-normal);
+  white-space: nowrap;
+}
+
+/* the selected pill holds a permanent inverted state; like the nav's active
+   tab it must not flip back on hover, or it reads as un-selecting */
+.tech__pill.invert-hover--inverse:hover,
+.tech__pill.invert-hover--inverse:focus-visible {
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+/* a row that wraps — not a fixed column count. tiles keep their intrinsic
+   width and spill onto the next line as the viewport narrows. */
+.tech__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.tech__tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  flex: none;
+  width: var(--tile-width);
+  height: var(--tile-height);
+  padding: var(--space-1);
+  border: var(--hairline);
+}
+
+/* a fixed box for every logo regardless of its native aspect ratio — contain
+   letterboxes inside it rather than letting the tile resize around the art */
+.tech__icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  object-fit: contain;
+  transition: none;
+}
+
+/* the cursor is a white circle under mix-blend-mode: difference, which would
+   render every logo as its own negative. paint order can't exempt just the
+   icons: .home__stage is position: sticky, so it opens a stacking context and
+   nothing inside it can rise above a fixed overlay no matter its z-index —
+   lifting the stage instead would drop the circle behind the title glyphs and
+   swallow them. so the circle gives up its blend over the lattice and reads as
+   a hairline ring, which leaves the logos exactly as they are. */
+body:has(.tech__grid:hover) .cursor-dot {
+  background: none;
+  mix-blend-mode: normal;
+  border: var(--hairline);
+}
+
+.tech__label {
+  text-align: center;
+  line-height: 1.2;
+  /* break-word, not anywhere: only split a label that genuinely cannot fit,
+     rather than filling the line greedily and orphaning two characters */
+  overflow-wrap: break-word;
+}
+
+/* narrower viewports fit fewer tiles per row, so the lattice gains rows and
+   needs shorter ones to stay inside the stage */
+@media (max-width: 1040px) {
+  .tech {
+    /* the floor is set by the longest label, not by how many tiles fit: below
+       ~76px "Firebase" and "JavaScript" break mid-word */
+    --tile-width: clamp(76px, 8.5vw, 88px);
+    --tile-height: clamp(72px, 11vh, 94px);
+    --icon-size: clamp(22px, 3.4vh, 32px);
+  }
+}
+
+/* short viewports: same problem from the other direction */
+@media (max-height: 720px) {
+  .tech {
+    --tile-height: clamp(68px, 12vh, 90px);
+    --icon-size: clamp(20px, 3.6vh, 30px);
+  }
+}

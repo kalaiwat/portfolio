@@ -1,6 +1,12 @@
 .footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: var(--color-white);
   border-top: var(--hairline);
-  padding-block: var(--space-5);
+  padding-block: var(--space-4);
 }
 
 .footer__list {
@@ -13,6 +19,6 @@
   display: inline-block;
   padding: 4px 6px;
   margin-inline-start: -6px;
-  font-size: var(--font-body);
+  font-size: var(--font-h4);
   font-weight: 500;
 }

@@ -1,26 +1,137 @@
 .home {
+  /* the visible stage: everything main isn't already spending on nav + footer */
+  --stage-height: calc(100vh - var(--nav-height) - var(--footer-height));
+}
+
+/* twice the stage gives exactly one stage-height of scroll — the full travel
+   of the title morph — and the sticky stage rests at the bottom afterwards,
+   so the skills panel stays on screen and interactive */
+.home__track {
+  height: calc(var(--stage-height) * 2);
+}
+
+.home__stage {
+  position: sticky;
+  /* 0, not --nav-height: the sticky constraint rect is already inset by main's
+     padding-top, which is exactly the nav clearance — offsetting again would
+     double-count it and push the stage under the footer */
+  top: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: calc(100vh - var(--nav-height));
-  padding-block: var(--space-7);
+  gap: var(--space-3);
+  height: var(--stage-height);
 }
 
-.home__name {
-  margin-bottom: var(--space-4);
+.home__title {
+  margin: 0;
+}
+
+/* the noise glyphs are wider than the letters they stand in for; reserving the
+   line box stops the panels below from jittering as the title churns */
+.home__title-text {
+  display: block;
+  min-height: 1em;
+  white-space: pre-wrap;
+}
+
+.home__panels {
+  display: grid;
+}
+
+/* both panels share one grid cell, whose height is set by the taller of the
+   two (the skills lattice). centring each panel inside that cell is half of
+   what keeps the short intro optically centred — Home.tsx supplies the other
+   half by lifting the title to match. */
+.home__panel {
+  grid-area: 1 / 1;
+  align-self: center;
+  min-width: 0;
+}
+
+/* resting state before any scroll: invisible AND inert, so the pills sitting
+   on top of the intro panel can't be clicked before they're revealed. the
+   ScrollTrigger takes over pointer-events from here. */
+.home__panel--skills {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .home__framing {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  max-width: 34ch;
+}
+
+/* two rows of two, side by side — reverts to a single column below this */
+@media (min-width: 900px) {
+  .home__framing {
+    grid-template-columns: repeat(2, 34ch);
+    column-gap: var(--space-6);
+    max-width: none;
+  }
+}
+
+.home__framing li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
   font-family: var(--font-display-family);
   font-size: var(--font-h3);
   font-weight: 500;
   line-height: 1.25;
   letter-spacing: -0.02em;
-  max-width: 34ch;
 }
 
-.home__current {
-  margin-top: var(--space-4);
-  font-size: var(--font-body);
-  max-width: 46ch;
+.home__bullet {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-top: 0.4em;
+  background: var(--color-black);
+}
+
+/* the fallback layout, used under prefers-reduced-motion and whenever the
+   pinned hero cannot fit the lattice in one viewport frame. no sticky stage,
+   no morph, no cross-fade — an ordinary document that scrolls normally, with
+   both sections stacked and fully readable. */
+.home--static .home__track {
+  height: auto;
+}
+
+.home--static .home__stage {
+  position: static;
+  height: auto;
+  justify-content: flex-start;
+  padding-block: var(--space-7);
+}
+
+/* spacing is set per-child rather than by a uniform gap: the heading has to
+   sit far from the bullets above it and close to the lattice it labels */
+.home--static .home__panels {
+  display: flex;
+  flex-direction: column;
+}
+
+/* the panels are stacked in flow here, not sharing a cell — align-self would
+   centre them across the inline axis instead of the block axis */
+.home--static .home__panel {
+  align-self: stretch;
+}
+
+.home--static .home__panel--skills {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* in the pinned layout this heading is the h1 mid-morph; here it has to be a
+   heading of its own, matching the h1's treatment so the two sections read as
+   siblings */
+.home--static .home__section-title {
+  margin-top: var(--space-8);
+}
+
+.home--static .home__panel--skills {
+  margin-top: var(--space-3);
 }
