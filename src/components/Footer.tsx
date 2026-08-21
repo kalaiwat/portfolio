@@ -1,14 +1,20 @@
 import type { Ref } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import resumePdf from '../assets/portfolio/resume.pdf?url';
 import './Footer.css';
 
+/* `external` is explicit rather than sniffed from the href, since the resume
+   is a same-origin build asset (no "http" prefix) that still needs to open
+   in a new tab like the true external links do */
 const contacts = [
-  { label: 'kareem.alaiwat@gmail.com', href: 'mailto:kareem.alaiwat@gmail.com' },
-  { label: 'GitHub', href: 'https://github.com/kalaiwat' },
+  { label: 'Contact', href: 'mailto:kareem.alaiwat@gmail.com', external: false },
+  { label: 'GitHub', href: 'https://github.com/kalaiwat', external: true },
   {
     label: 'LinkedIn',
     href: 'https://www.linkedin.com/in/kareem-alaiwat-21a62a306',
+    external: true,
   },
+  { label: 'Resume', href: resumePdf, external: true },
 ];
 
 /** on a /projects/:slug or /experience/:slug detail page, the footer's first
@@ -39,14 +45,12 @@ export function Footer({ ref }: { ref?: Ref<HTMLElement> }) {
             </Link>
           </li>
         )}
-        {contacts.map(({ label, href }) => (
+        {contacts.map(({ label, href, external }) => (
           <li key={href}>
             <a
               className="footer__link invert-hover"
               href={href}
-              {...(href.startsWith('http')
-                ? { target: '_blank', rel: 'noreferrer noopener' }
-                : {})}
+              {...(external ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
             >
               {label}
             </a>

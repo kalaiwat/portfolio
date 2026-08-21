@@ -1,12 +1,20 @@
 .footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 50;
   background: var(--color-white);
   border-top: var(--hairline);
   padding-block: var(--space-4);
+}
+
+/* fixed from the tablet breakpoint up; on phones it stays in normal flow at
+   the end of the page instead, since a footer pinned over content that's
+   already this close to full-screen reads as cramped rather than persistent */
+@media (min-width: 768px) {
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+  }
 }
 
 .footer__list {

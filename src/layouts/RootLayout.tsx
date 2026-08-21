@@ -11,9 +11,12 @@ export function RootLayout() {
   const mainRef = useRef<HTMLElement>(null);
   const { pathname } = useLocation();
 
-  // both nav and footer are fixed, so main has to clear them on both ends —
+  // nav is fixed at every width, so main always has to clear it at the top —
   // and nav wraps to two rows on narrow viewports, so clearance is measured
-  // rather than hardcoded
+  // rather than hardcoded. the footer is only fixed from the tablet
+  // breakpoint up (see Footer.css); it's measured unconditionally anyway
+  // since that's cheap, and --footer-height simply goes unused by the mobile
+  // rules that don't reserve space for it.
   useLayoutEffect(() => {
     const nav = navRef.current;
     const footer = footerRef.current;
@@ -59,9 +62,9 @@ export function RootLayout() {
       <div className="shell">
         <main className="main" id="main" ref={mainRef}>
           <Outlet />
+          <Footer ref={footerRef} />
         </main>
       </div>
-      <Footer ref={footerRef} />
     </>
   );
 }

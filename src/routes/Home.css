@@ -1,6 +1,22 @@
 .home {
-  /* the visible stage: everything main isn't already spending on nav + footer */
+  /* the visible stage: everything main isn't already spending on nav +
+     footer. footer-height is only ever nonzero from the tablet breakpoint
+     up (where the footer is fixed, see Footer.css) — below that this
+     section is in the fallback static layout anyway (see .home--static
+     below), which ignores --stage-height entirely, so subtracting it here
+     unconditionally is harmless on mobile.
+     dvh over vh for the same reason as .shell (see RootLayout.css): vh
+     resolves to the viewport's largest possible height on mobile, taller
+     than what's visible whenever the browser's chrome is showing. */
   --stage-height: calc(100vh - var(--nav-height) - var(--footer-height));
+  --stage-height: calc(100dvh - var(--nav-height) - var(--footer-height));
+
+  /* home's content runs 25% smaller than the rest of the site — these
+     shadow the global tokens for every descendant that reads --font-display
+     or --font-h3 (the title and the framing bullets), rather than touching
+     the tokens themselves, which every other page still uses at full size */
+  --font-display: clamp(2.625rem, 6.75vw, 6.75rem);
+  --font-h3: clamp(0.84375rem, 1.5vw, 1.125rem);
 }
 
 /* twice the stage gives exactly one stage-height of scroll — the full travel
@@ -86,8 +102,8 @@
 
 .home__bullet {
   flex: none;
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
   margin-top: 0.4em;
   background: var(--color-black);
 }

@@ -32,7 +32,7 @@ export function TechGrid() {
   }, [active]);
 
   return (
-    <div className="tech">
+    <div className="tech tech--home-scaled">
       {/* the heading lives in Home — it is the h1 mid-morph in the pinned
           layout and a section heading in the static one */}
       <ul className="tech__filters" role="tablist" aria-label="filter skills by category">

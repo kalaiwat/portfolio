@@ -49,7 +49,8 @@
   /* measured at runtime by RootLayout so main clears the fixed nav even when
      the nav wraps to two rows on narrow viewports */
   --nav-height: 64px;
-  /* measured at runtime by RootLayout so main clears the fixed footer */
+  /* measured at runtime by RootLayout; only reserved against from the
+     tablet breakpoint up, where the footer is fixed (see Footer.css) */
   --footer-height: 48px;
 
   --hairline: 1px solid var(--color-black);

@@ -12,6 +12,17 @@
   gap: var(--space-3);
 }
 
+/* home's grid runs 25% smaller than StackGrid's use of these same tiles
+   elsewhere (project/experience stacks) — the compound selector keeps this
+   above the two breakpoint overrides below regardless of source order, since
+   an equal-specificity .tech rule inside a media query would otherwise win
+   on the usual last-one-wins tiebreak */
+.tech.tech--home-scaled {
+  --tile-width: clamp(54px, 5.625vw, 75px);
+  --tile-height: clamp(60px, 9.75vh, 84px);
+  --icon-size: clamp(18px, 3.15vh, 28.5px);
+}
+
 /* sized to match .nav__link exactly — same family, size, weight and padding,
    so the filter row reads as a second, local navigation */
 .tech__filters {
@@ -100,6 +111,12 @@ body:has(.tech__grid:hover) .cursor-dot {
     --tile-height: clamp(72px, 11vh, 94px);
     --icon-size: clamp(22px, 3.4vh, 32px);
   }
+
+  .tech.tech--home-scaled {
+    --tile-width: clamp(57px, 6.375vw, 66px);
+    --tile-height: clamp(54px, 8.25vh, 70.5px);
+    --icon-size: clamp(16.5px, 2.55vh, 24px);
+  }
 }
 
 /* short viewports: same problem from the other direction */
@@ -107,5 +124,10 @@ body:has(.tech__grid:hover) .cursor-dot {
   .tech {
     --tile-height: clamp(68px, 12vh, 90px);
     --icon-size: clamp(20px, 3.6vh, 30px);
+  }
+
+  .tech.tech--home-scaled {
+    --tile-height: clamp(51px, 9vh, 67.5px);
+    --icon-size: clamp(15px, 2.7vh, 22.5px);
   }
 }
