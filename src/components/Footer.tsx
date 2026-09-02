@@ -7,7 +7,7 @@ import './Footer.css';
    is a same-origin build asset (no "http" prefix) that still needs to open
    in a new tab like the true external links do */
 const contacts = [
-  { label: 'Contact', href: 'mailto:kareem.alaiwat@gmail.com', external: false },
+  { label: 'Contact', href: 'mailto:kalaiwat3@gatech.edu', external: false },
   { label: 'GitHub', href: 'https://github.com/kalaiwat', external: true },
   {
     label: 'LinkedIn',
