@@ -18,7 +18,8 @@
    an equal-specificity .tech rule inside a media query would otherwise win
    on the usual last-one-wins tiebreak */
 .tech.tech--home-scaled {
-  --tile-width: clamp(54px, 5.625vw, 75px);
+  /* no --tile-width here: the grid rule below gives home's tiles a guaranteed
+     minimum width instead of the vw-scaled one the base .tech rule sets */
   --tile-height: clamp(60px, 9.75vh, 84px);
   --icon-size: clamp(18px, 3.15vh, 28.5px);
 }
@@ -113,10 +114,26 @@ body:has(.tech__grid:hover) .cursor-dot {
   }
 
   .tech.tech--home-scaled {
-    --tile-width: clamp(57px, 6.375vw, 66px);
     --tile-height: clamp(54px, 8.25vh, 70.5px);
     --icon-size: clamp(16.5px, 2.55vh, 24px);
   }
+}
+
+/* the vw-based --tile-width above thins out badly at in-between window sizes
+   (a laptop snapped to half-screen, a resized browser) — the vw term is too
+   small there to keep pace with how many tiles the row has room for, so it
+   sinks toward its floor while still cramming in far more columns than a
+   logo/label wants. a grid with a guaranteed minimum track solves every
+   width at once: phones settle at 4 columns, in-between widths get as many
+   columns as fit at >=70px, and full desktop still lands in the same ~14-per-
+   row lattice the old clamp produced at its ceiling. */
+.tech.tech--home-scaled .tech__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+}
+
+.tech.tech--home-scaled .tech__tile {
+  width: auto;
 }
 
 /* short viewports: same problem from the other direction */

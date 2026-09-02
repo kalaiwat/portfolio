@@ -25,7 +25,9 @@ const catalog: Record<string, { label: string; tags: Exclude<TechCategory, 'all'
   android: { label: 'Android', tags: ['mobile'] },
   appsflyer: { label: 'AppsFlyer', tags: ['tools'] },
   claude: { label: 'Claude', tags: ['tools'] },
+  catch2: { label: 'Catch2', tags: ['backend', 'tools'] },
   cli: { label: 'CLI', tags: ['tools'] },
+  cmake: { label: 'CMake', tags: ['backend', 'tools'] },
   codex: { label: 'Codex', tags: ['tools'] },
   cpp: { label: 'C++', tags: ['backend'] },
   csharp: { label: 'C#', tags: ['backend'] },
@@ -64,7 +66,7 @@ const aliases: Record<string, string> = {
   reactjs: 'react',
 };
 
-const normalize = (value: string) => value.toLowerCase().replace(/[^a-z0-9]/g, '');
+const normalize = (value: string) => value.toLowerCase().replace(/[^a-z0-9+#]/g, '');
 
 /** looks up a stack entry (e.g. "React.js") against the tech catalog by normalized
     label/id match, falling back to the alias table above */
