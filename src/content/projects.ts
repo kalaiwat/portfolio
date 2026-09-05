@@ -60,7 +60,7 @@ export const projects: Project[] = [
       'Google Cloud',
     ],
     logo: devbrainLogo,
-    link: 'https://www.linkedin.com/posts/its-a-wrap-on-clawweek-for-four-days-ugcPost-7473951683358765056-NDDS/',
+    link: 'https://www.linkedin.com/feed/update/urn:li:activity:7501825907213402112/',
   },
   {
     slug: 'derm-ai',
