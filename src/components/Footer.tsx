@@ -11,7 +11,7 @@ const contacts = [
   { label: 'GitHub', href: 'https://github.com/kalaiwat', external: true },
   {
     label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/kareem-alaiwat-21a62a306',
+    href: 'https://www.linkedin.com/in/kareem-alaiwat',
     external: true,
   },
   { label: 'Resume', href: resumePdf, external: true },
