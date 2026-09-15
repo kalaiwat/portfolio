@@ -1,6 +1,6 @@
 import type { Ref } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import resumePdf from '../assets/portfolio/resume.pdf?url';
+import resumePdf from '../assets/portfolio/resume_926.pdf?url';
 import './Footer.css';
 
 /* `external` is explicit rather than sniffed from the href, since the resume
