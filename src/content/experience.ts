@@ -61,7 +61,7 @@ export const experience: ExperienceItem[] = [
       'architected a full notification framework: toast UI, notification center, SQLite-backed persistence, actionable agent flows, hotkeys, and Do Not Disturb, with unified action dispatching shared across the scheduler and agent systems.',
       'also built foundational interaction infrastructure: a declarative, focus-aware menu system, a file/folder attachment pipeline, notification deep linking, and extensible AI-agent interaction flows.',
     ],
-    stack: ['Python', 'Qt', 'X11', 'SQLite'],
+    stack: ['Python', 'Qt', 'X11', 'Linux'],
     link: 'https://10x.so',
   },
   {

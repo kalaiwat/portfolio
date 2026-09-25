@@ -29,7 +29,7 @@ export const projects: Project[] = [
     started: 'August 2026 – Present',
     summary: 'a reverse-mode automatic differentiation engine built in C++.',
     body: [
-      "implementing the core mechanism behind PyTorch style neural network training: a computation graph recorded via operator overloading and walked backward via topological sort, with gradient accumulation handled explicitly to support reused variables and graphs with diamond shaped dependencies. node ownership is reference counted, and memory safety is verified with sanitizers (ASan/UBSan); each primitive's backward pass is hand derived and unit tested in isolation before composition. the scalar engine is in progress, with a planned extension to tensor operations (broadcasting, matmul) and cross validation against PyTorch gradients.",
+      "implementing the core mechanism behind neural network training in common ML frameworks: a computation graph recorded via operator overloading and walked backward via topological sort, with gradient accumulation handled explicitly to support reused variables and graphs with diamond shaped dependencies. node ownership is reference counted, and memory safety is verified with sanitizers (ASan/UBSan); each primitive's backward pass is hand derived and unit tested in isolation before composition. the scalar engine is in progress, with a planned extension to tensor operations (broadcasting, matmul) and cross validation against PyTorch gradients.",
     ],
     stack: ['C++', 'CMake', 'Catch2'],
     logo: autogradEngineLogo,
