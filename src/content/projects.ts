@@ -71,7 +71,7 @@ export const projects: Project[] = [
       'AI-powered skin analysis and product recommendation app, integrated into a partner iOS product.',
     body: [
       'an app for AI-powered skin analysis and product recommendations, integrating OpenAI and Cloud Vision APIs to analyze skin condition and suggest products against user profiles.',
-      "partnered with Nolla Health to integrate Derm AI's scanning features into the Nolla Acne iOS app, shipping in-app scanning streaks, a native home screen widget, an accomplishments feature tracking treatment adherence and skin improvement, and environment-aware weather widgets.",
+      "partnered with Nolla Health to integrate Derm AI's scanning features into the Nolla Skin iOS app, shipping in-app scanning streaks, a native home screen widget, an accomplishments feature tracking treatment adherence and skin improvement, and environment-aware weather widgets.",
       'reached 1,000+ users, 20,000+ App Store impressions, 2,000+ scans taken.',
     ],
     stack: [

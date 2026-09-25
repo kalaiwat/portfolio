@@ -69,11 +69,11 @@ export const experience: ExperienceItem[] = [
     org: 'Nolla Health',
     period: 'Jan 2026 – Feb 2026',
     description:
-      "integrated Derm AI's scanning features into the Nolla Acne iOS app, including streaks, a native home screen widget, and treatment adherence tracking.",
+      "integrated Derm AI's scanning features into the Nolla Skin iOS app, including streaks, a native home screen widget, and treatment adherence tracking.",
     logo: nollaLogo,
     slug: 'nolla',
     body: [
-      'collaborated in a cross-company initiative to integrate Derm AI features into the Nolla Acne iOS app.',
+      'collaborated in a cross-company initiative to integrate Derm AI features into the Nolla Skin iOS app.',
       "developed user-friendly features using Swift and SwiftUI, enhancing the app's functionality.",
       'designed in-app scanning streaks and a native home screen widget to promote user engagement.',
       'implemented an accomplishments feature to track treatment adherence and skin improvement.',
